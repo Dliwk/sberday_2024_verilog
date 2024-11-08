@@ -45,6 +45,8 @@ module game_logic (
     logic signed [9:0] speed_x;
     logic signed [9:0] speed_y;
 
+    wire  [1:0] state; // 0 - idle, 1 - moving
+
     parameter signed DECEL = 10'd1;
 
     
@@ -69,6 +71,7 @@ module game_logic (
       ball_y <= 300;
       speed_x <= 0;
       speed_y <= 0;
+      state <= 0;
     end
     else if ( end_of_frame ) begin
       if (button_l)
@@ -79,9 +82,17 @@ module game_logic (
         speed_y <= speed_y - 1;
       if (button_d)
         speed_y <= speed_y + 1;
+      
       ball_x <= ball_x + speed_x;
       ball_y <= ball_y + speed_y;
-      if ( frames_cntr == 0 ) begin
+
+      if (speed_x != 0 || speed_y != 0) begin
+        state <= 1;
+      else
+        state <= 0;
+      end
+      
+      if (frames_cntr == 0 && state == 1) begin
         if (speed_x > 0)
           speed_x <= speed_x - DECEL;
         else
