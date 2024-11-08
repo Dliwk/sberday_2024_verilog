@@ -27,6 +27,54 @@ module game_logic (
     input  wire  [2:0]    SW        
 );
 
+function logic signed [19:0] dist2;
+//function logic signed [9:0] dist2;
+  input logic signed [9:0] x1;
+  input logic signed [9:0] y1;
+  input logic signed [9:0] x2;
+  input logic signed [9:0] y2;
+begin
+  //dist2 = {x1 - x2} * {x1 - x2} + {y1 - y2} * {y1 - y2};
+  dist2 = abs10({x1 - x2}) * abs10({x1 - x2}) + abs10({y1 - y2}) * abs10({y1 - y2});
+  //dist2 = {10'b0, x1 - x2} * {10'b0, x1 - x2} + {10'b0, y1 - y2} * {10'b0, y1 - y2};
+end
+endfunction
+
+function logic signed [19:0] dotP;
+  input logic signed [9:0] x1;
+  input logic signed [9:0] y1;
+  input logic signed [9:0] x2;
+  input logic signed [9:0] y2;
+begin
+  dotP = x1 * x2 + y1 * y2;
+end
+endfunction
+
+function logic signed [19:0] crossP;
+  input logic signed [9:0] x1;
+  input logic signed [9:0] y1;
+  input logic signed [9:0] x2;
+  input logic signed [9:0] y2;
+begin
+  crossP = x1 * y2 - y1 * x2;
+end
+endfunction
+
+function logic signed [19:0] abs20;
+  input logic signed [19:0] x;
+begin
+  abs20 = x < 0 ? -x : x;
+end
+endfunction
+
+function logic signed [9:0] abs10;
+  input logic signed [9:0] x;
+begin
+  abs10 = x < 0 ? -x : x;
+end
+endfunction
+
+
 //------------------------- Variables                    ----------------------------//
   //----------------------- Counters                     --------------------------//
     parameter         FRAMES_PER_ACTION = 5;  // Action delay
@@ -88,6 +136,8 @@ module game_logic (
     assign map_tex = map_0_tex_out;
     //assign ver_collide = map_coll_x;
     //assign hor_collide = map_coll_y;
+    
+    logic [19:0] arrow_len2;
   
   // ----------------------------- ball movement --------------------- //
 
@@ -97,8 +147,10 @@ module game_logic (
       ball_y = 300;
       speed_x = 0;
       speed_y = 0;
+      arrow_len2 = 0;
     end
     else if ( end_of_frame ) begin
+      arrow_len2 = (speed_x * speed_x + speed_y * speed_y);
       if (map_coll_x)
         speed_x = -speed_x;
       if (map_coll_y)
@@ -130,14 +182,16 @@ module game_logic (
           speed_y = speed_y + DECEL;
       end
 
-      if (speed_x > 10)
-        speed_x = 10;
-      if (speed_x < -10)
-        speed_x = -10;
-      if (speed_y > 10)
-        speed_y = 10;
-      if (speed_y < -10)
-        speed_y = -10;
+
+      // FIXME: normalize
+      if (speed_x > 20)
+        speed_x = 20;
+      if (speed_x < -20)
+        speed_x = -20;
+      if (speed_y > 20)
+        speed_y = 20;
+      if (speed_y < -20)
+        speed_y = -20;
     end
   end
 
@@ -178,19 +232,50 @@ module game_logic (
 
 //____________________________________________________________________________//
 
-    logic draw_ball;
 
-  always @ (posedge pixel_clk ) begin
-    draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
-  end
 
 //------------- RGB MUX outputs                                  -------------//
-  assign  red      = (draw_ball ? 4'hf : (map_tex ? 4'hf : 4'h0));
-  assign  green    = (draw_ball ? 4'hf : 4'h0);
-  //assign  blue     = (draw_ball ? 4'hf : (map_tex ? 4'hf : 4'h0));
-  assign  blue     = (draw_ball ? 4'hf : 4'h0);
-  //assign  red     = (SW[0] ? 4'hf : 4'h0);
-  //assign  green   = (SW[1] ? 4'hf : 4'h0);
-  //assign  blue    = (SW[2] ? 4'hf : 4'h0);
+
+  logic               draw_ball;
+  logic signed [9:0]  arrow_x;
+  logic signed [9:0]  arrow_y;
+  logic [11:0]        map_tex_color;
+  logic               draw_arrow_length;
+  logic [19:0]        triangle_square;
+  logic               draw_arrow_direction;
+  logic               draw_arrow;
+  logic [11:0]        current_color;
+  logic               draw_arrow_orientation;
+
+  always @ (posedge pixel_clk ) begin
+    draw_ball = dist2(h_coord, v_coord, ball_x, ball_y) < 100;
+    //draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
+
+    arrow_x = speed_x;
+    arrow_y = speed_y;
+
+    map_tex_color = (map_tex ? 12'h0f0 : 12'h000);
+    draw_arrow_length = dist2(h_coord, v_coord, ball_x, ball_y) < arrow_len2 * 4;
+    triangle_square = abs20(crossP(ball_x           - h_coord, ball_y           - v_coord,
+                                   ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord));
+    draw_arrow_direction = (triangle_square * triangle_square / arrow_len2) < 16;
+    draw_arrow_orientation = crossP(ball_x           - h_coord, ball_y           - v_coord,
+                                    // ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord) < 0;
+                                    v_coord - arrow_y - ball_y, ball_x + arrow_y - h_coord) < 0;
+
+    draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
+
+    current_color = 
+                    draw_arrow ? 12'hf00 :
+                    draw_ball ? 12'hfff : 
+                    map_tex_color;
+  end
+
+  assign red   = current_color[3:0];
+  assign green = current_color[7:4];
+  assign blue  = current_color[11:8];
+  //assign  red      = (draw_ball ? 4'hf : (map_tex ? 4'hf : 4'h0));
+  //assign  green    = (draw_ball ? 4'hf : 4'h0);
+  //assign  blue     = (draw_ball ? 4'hf : 4'h0);
 //____________________________________________________________________________//
 endmodule
