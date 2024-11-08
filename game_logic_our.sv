@@ -41,8 +41,6 @@ module game_logic (
 
     wire  [9:0] ball_x;
     wire  [9:0] ball_y;
-
-
     
     //   0 1         X
     //  +------------->
