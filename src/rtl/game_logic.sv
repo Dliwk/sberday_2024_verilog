@@ -47,6 +47,9 @@ module game_logic (
 
     parameter signed DECEL = 10'd1;
 
+    wire        map_0_x_rom_out;
+    wire        map_0_y_rom_out;
+    wire [18:0] map_read_address;
     
     //   0 1         X
     //  +------------->
@@ -58,47 +61,84 @@ module game_logic (
     //  |
     //  V
 
+    assign map_read_address = v_coord * 800 + {8'b0, h_coord};
+    map_0_x_rom map_0_x_rom (
+      .addr   (map_read_address),
+      .data   (map_0_x_rom_out)
+    );
+    map_0_y_rom map_0_y_rom (
+      .addr   (map_read_address),
+      .data   (map_0_y_rom_out)
+    );
+    logic map_coll_x;
+    logic map_coll_y;
 
-  // ----------------------------------- collision detection ------------------------ //
-    logic ver_collide;
-    logic hor_collide;
+    assign map_coll_x = map_0_x_rom_out;
+    assign map_coll_y = map_0_y_rom_out;
+    //assign ver_collide = map_coll_x;
+    //assign hor_collide = map_coll_y;
+  
+  // ----------------------------- ball movement --------------------- //
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x <= 400;
-      ball_y <= 300;
-      speed_x <= 0;
-      speed_y <= 0;
+      ball_x = 200;
+      ball_y = 300;
+      speed_x = 0;
+      speed_y = 0;
     end
     else if ( end_of_frame ) begin
+      // XXX: точно <=? может все-таки =?
+      if (map_coll_x)
+        //speed_x = -speed_x;
+        ball_x = 200;
+      if (map_coll_y)
+        ball_y = 300;
+        //speed_y = -speed_y;
+
       if (button_l)
-        speed_x <= speed_x - 1;
+        speed_x = speed_x - 1;
       if (button_r)
-        speed_x <= speed_x + 1;
+        speed_x = speed_x + 1;
       if (button_u)
-        speed_y <= speed_y - 1;
+        speed_y = speed_y - 1;
       if (button_d)
-        speed_y <= speed_y + 1;
-      ball_x <= ball_x + speed_x;
-      ball_y <= ball_y + speed_y;
+        speed_y = speed_y + 1;
+      ball_x = ball_x + speed_x;
+      ball_y = ball_y + speed_y;
       if ( frames_cntr == 0 ) begin
         if (speed_x > 0)
-          speed_x <= speed_x - DECEL;
+          speed_x = speed_x - DECEL;
         else
-          speed_x <= speed_x + DECEL;
+          speed_x = speed_x + DECEL;
         if (speed_y > 0)
-          speed_y <= speed_y - DECEL;
+          speed_y = speed_y - DECEL;
         else
-          speed_y <= speed_y + DECEL;
-        if (-DECEL < speed_x && speed_x < DECEL)
-          speed_x <= 0;
-        if (-DECEL < speed_y && speed_y < DECEL)
-          speed_y <= 0;
+          speed_y = speed_y + DECEL;
+        if (-DECEL <= speed_x && speed_x <= DECEL)
+          speed_x = 0;
+        if (-DECEL <= speed_y && speed_y <= DECEL)
+          speed_y = 0;
       end
     end
   end
 
-//------------------------- End of Frame                 ----------------------------//
+
+  // ----------------------------------- collision detection ------------------------ //
+  
+  //always_ff @ ( posedge pixel_clk ) begin
+  //  if ( !rst_n ) begin
+  //    ver_collide = 0;
+  //    hor_collide = 0;
+  //  end
+  //  else if ( end_of_frame ) begin
+  //    ver_collide = map_coll_x;
+  //    hor_collide = map_coll_y;
+  //  end
+  //end
+
+
+  //------------------------- End of Frame                 ----------------------------//
   // We recount game object once at the end of display counter //
   always_ff @( posedge pixel_clk ) begin
     if ( !rst_n )
@@ -135,13 +175,14 @@ module game_logic (
     logic draw_ball;
 
   always @ (posedge pixel_clk ) begin
-    draw_ball <= (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
+    draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
   end
 
 //------------- RGB MUX outputs                                  -------------//
-  assign  red     = (draw_ball ? 4'hf : 4'h0);
-  assign  green   = (draw_ball ? 4'hf : 4'h0);
-  assign  blue    = (draw_ball ? 4'hf : 4'h0);
+  assign  red      = (draw_ball ? 4'hf : (map_coll_x ? 4'hf : 4'h0));
+  assign  green    = (draw_ball ? 4'hf : 4'h0);
+  assign  blue     = (draw_ball ? 4'hf : (map_coll_y ? 4'hf : 4'h0));
+  //assign  blue     = (draw_ball ? 4'hf : 4'h0);
   //assign  red     = (SW[0] ? 4'hf : 4'h0);
   //assign  green   = (SW[1] ? 4'hf : 4'h0);
   //assign  blue    = (SW[2] ? 4'hf : 4'h0);
