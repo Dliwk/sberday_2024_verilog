@@ -1,0 +1,854 @@
+/*
+
+AMD Vivado v2024.1 (64-bit) [Major: 2024, Minor: 1]
+SW Build: 5076996 on Wed May 22 18:36:09 MDT 2024
+IP Build: 5075265 on Wed May 22 21:45:21 MDT 2024
+IP Build: 5075265 on Wed May 22 21:45:21 MDT 2024
+
+Process ID (PID): 989245
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Fri Nov 08 18:32:50 MSK 2024
+Time zone: 	Moscow Standard Time (Europe/Moscow)
+
+OS: Ubuntu
+OS Version: 6.8.0-45-generic
+OS Architecture: amd64
+Available processors (cores): 12
+LSB Release Description: Ubuntu 22.04.5 LTS
+
+Display: 0
+Screen size: 1920x1080
+Local screen bounds: x = 70, y = 27, width = 1850, height = 1053
+Screen resolution (DPI): 100
+Available screens: 2
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+OS font scaling: 100%
+Anti-Alias Enabled: false
+
+Java version: 	21.0.1 64-bit
+JavaFX version: 21.0.1
+Java home: 	/tools/Xilinx/Vivado/2024.1/tps/lnx64/jre21.0.1_12
+Java executable: 	/tools/Xilinx/Vivado/2024.1/tps/lnx64/jre21.0.1_12/bin/java
+Java arguments: 	[-Dsun.java2d.pmoffscreen=false, -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2, -Dsun.java2d.xrender=false, -Dsun.java2d.uiScale.enabled=false, -Dswing.aatext=true, -XX:-UsePerfData, -Djdk.map.althashing.threshold=512, -XX:StringTableSize=4072, -XX:+UseStringDeduplication, -XX:MaxGCPauseMillis=200, -XX:+ParallelRefProcEnabled, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.base/java.nio=ALL-UNNAMED, --add-opens=java.desktop/sun.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/java.awt.event=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.base/java.nio=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.table=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.desktop/sun.awt.shell=ALL-UNNAMED, --add-exports=java.base/sun.security.action=ALL-UNNAMED, --add-exports=java.desktop/sun.font=ALL-UNNAMED, --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED, -XX:NewSize=80m, -XX:MaxNewSize=80m, -Xms512m, -Xmx4072m, -Xss10m, -Xrs]
+Java initial memory (-Xms): 	512 MB
+Java maximum memory (-Xmx):	 3 GB
+
+User name: 	stud00
+User home directory: /home/stud00
+User working directory: /home/stud00/hackathon/sberday_nexys_a7_svga
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /tools/Xilinx/Vivado
+HDI_APPROOT: /tools/Xilinx/Vivado/2024.1
+RDI_DATADIR: /tools/Xilinx/Vivado/2024.1/data
+RDI_BINDIR: /tools/Xilinx/Vivado/2024.1/bin
+
+Vivado preferences file: /home/stud00/.Xilinx/Vivado/2024.1/vivado.xml
+Vivado preferences directory: /home/stud00/.Xilinx/Vivado/2024.1/
+Vivado layouts directory: /home/stud00/.Xilinx/Vivado/2024.1/data/layouts
+PlanAhead jar file: 	/tools/Xilinx/Vivado/2024.1/lib/classes/planAhead.jar
+Vivado log file: 	/home/stud00/hackathon/sberday_nexys_a7_svga/vivado.log
+Vivado journal file: 	/home/stud00/hackathon/sberday_nexys_a7_svga/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-989245-stud00-pc
+Non-Default Parameters:	[]
+
+Xilinx & AMD Environment Variables
+--------------------------------------------------------------------------------------------
+GNOME_SHELL_SESSION_MODE: ubuntu
+RDI_APPROOT: /tools/Xilinx/Vivado/2024.1
+RDI_BASEROOT: /tools/Xilinx/Vivado
+RDI_BINROOT: /tools/Xilinx/Vivado/2024.1/bin
+RDI_BUILD: yes
+RDI_DATADIR: /tools/Xilinx/Vivado/2024.1/data
+RDI_INSTALLROOT: /tools/Xilinx
+RDI_INSTALLVER: 2024.1
+RDI_JAVA_PLATFORM: 
+RDI_JAVA_VERSION: 21.0.1_12
+RDI_LIBDIR: /tools/Xilinx/Vivado/2024.1/lib/lnx64.o/Ubuntu/22:/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/Ubuntu:/tools/Xilinx/Vivado/2024.1/lib/lnx64.o
+RDI_OPT_EXT: .o
+RDI_PATCHROOT: 
+RDI_PLATFORM: lnx64
+RDI_PREPEND_PATH: /tools/Xilinx/Vivado/2024.1/ids_lite/ISE/bin/lin64
+RDI_PROG: /tools/Xilinx/Vivado/2024.1/bin/unwrapped/lnx64.o/vivado
+RDI_SESSION_INFO: /home/stud00/hackathon/sberday_nexys_a7_svga:stud00-pc_1731079958_989204
+RDI_SHARED_DATA: /tools/Xilinx/SharedData/2024.1/data
+RDI_TPS_ROOT: /tools/Xilinx/Vivado/2024.1/tps/lnx64
+RDI_USE_JDK21: True
+SHELL: /bin/bash
+XILINX: /tools/Xilinx/Vivado/2024.1/ids_lite/ISE
+XILINX_DSP: /tools/Xilinx/Vivado/2024.1/ids_lite/ISE
+XILINX_HLS: /tools/Xilinx/Vitis_HLS/2024.1
+XILINX_PLANAHEAD: /tools/Xilinx/Vivado/2024.1
+XILINX_VIVADO: /tools/Xilinx/Vivado/2024.1
+XILINX_VIVADO_HLS: /tools/Xilinx/Vivado/2024.1
+
+
+GUI allocated memory:	512 MB
+GUI max memory:		4,072 MB
+Engine allocated memory: 1,513 MB
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+selectButton(PAResourceEtoH.GettingStartedView_OPEN_PROJECT, "Open Project"); // t (PAResourceEtoH.GettingStartedView_OPEN_PROJECT)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_PROJECT
+// HMemoryUtils.trashcanNow. Engine heap size: 1,519 MB. GUI used memory: 73 MB. Current time: 11/8/24, 6:32:51 PM MSK
+setFileChooser("/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.xpr");
+// Opening Vivado Project: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.xpr. Version: Vivado v2024.1 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FLOW_ADDED
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: COMPOSITE_FILE_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 89 MB (+90690kb) [00:00:16]
+// [Engine Memory]: 1,638 MB (+1565743kb) [00:00:16]
+// [GUI Memory]: 114 MB (+21531kb) [00:00:17]
+// WARNING: HEventQueue.dispatchEvent() is taking  1330 ms.
+// Tcl Message: open_project /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.xpr 
+// Tcl Message: INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.gen/sources_1'. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.1/data/ip'. 
+// Project name: sberday_nexys_a7_svga; location: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado; part: xc7a100tcsg324-1
+// [GUI Memory]: 131 MB (+12358kb) [00:00:18]
+dismissDialog("Open Project"); // bj (Open Project Progress)
+// [Engine Memory]: 1,729 MB (+9373kb) [00:00:21]
+// Tcl Message: update_compile_order -fileset sources_1 
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// Tcl Message: INFO: [Project 1-1161] Replacing file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.srcs/utils_1/imports/synth_1/sberday_nexys_a7_svga.dcp with file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/sberday_nexys_a7_svga.dcp 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 18:33:07 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 18:33:07 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// [GUI Memory]: 150 MB (+12852kb) [00:00:27]
+// [GUI Memory]: 158 MB (+487kb) [00:00:28]
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, sberday_nexys_a7_svga (sberday_nexys_a7_svga.sv)]", 1); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE)
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 84 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 22, true); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree) - Node
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HARDWARE_MANAGER
+// Tcl (Dont Echo) Command: 'rdi::info_commands get_hw_probes'
+// Tcl (Dont Echo) Command: 'load_features labtools'
+// TclEventType: LOAD_FEATURE
+// TclEventType: HW_SESSION_OPEN
+// Tcl Message: open_hw_manager 
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // u (PAResourceOtoP.PAViews_PROJECT_SUMMARY, PlanAheadTabProject Summary)
+dismissDialog("Open Hardware Manager"); // bj (Open Hardware Manager Progress)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,797 MB. GUI used memory: 78 MB. Current time: 11/8/24, 6:34:41 PM MSK
+selectButton(PAResourceOtoP.ProgramDebugTab_OPEN_TARGET, "Open target"); // g (PAResourceOtoP.ProgramDebugTab_OPEN_TARGET)
+selectMenuItem(PAResourceCommand.PACommandNames_AUTO_CONNECT_TARGET, "Auto Connect"); // ap (PAResourceCommand.PACommandNames_AUTO_CONNECT_TARGET, auto_connect_target_menu)
+// Run Command: PAResourceCommand.PACommandNames_AUTO_CONNECT_TARGET
+// TclEventType: HW_SERVER_UPDATE
+// Tcl Message: connect_hw_server -allow_non_jtag 
+// Tcl Message: INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121 INFO: [Labtools 27-2222] Launching hw_server... INFO: [Labtools 27-2221] Launch Output:  ****** Xilinx hw_server v2024.1   **** Build date : May 22 2024 at 19:19:01     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:0 INFO: [Labtools 27-3417] Launching cs_server... 
+// TclEventType: HW_SERVER_UPDATE
+// Tcl Message: INFO: [Labtools 27-2221] Launch Output:   ******** Xilinx cs_server v2024.1.0   ****** Build date   : Apr 27 2024-04:40:49     **** Build number : 2024.1.1714182049       ** Copyright 2017-2022 Xilinx, Inc. All Rights Reserved.       ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.    
+// TclEventType: HW_TARGET_CHANGE
+// TclEventType: HW_TARGET_CLOSE
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_ADD
+// TclEventType: HW_TARGET_UPDATE
+// Tcl Message: open_hw_target 
+// Tcl Message: INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210292B9CC95A 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: set_property PROGRAM.FILE {/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/sberday_nexys_a7_svga.bit} [get_hw_devices xc7a100t_0] 
+// Tcl Message: current_hw_device [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_CHANGE
+// TclEventType: HW_DEVICE_UPDATE
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0] 
+// Tcl Message: INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it. 
+dismissDialog("Auto Connect"); // bj (Auto Connect Progress)
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "xc7a100t_0 (1) ; Programmed", 2, "xc7a100t_0 (1)", 0, true, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_PROGRAM_FPGA, "Program Device..."); // ap (PAResourceCommand.PACommandNames_PROGRAM_FPGA, program_fpga_menu)
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+selectButton(PAResourceOtoP.ProgramFpgaDialog_PROGRAM, "Program", "Program Device"); // a (PAResourceOtoP.ProgramFpgaDialog_PROGRAM, RDIResource.BaseDialog_OK)
+// TclEventType: HW_DEVICE_CHANGE
+dismissDialog("Program Device"); // aP (dialog1)
+// Tcl Message: set_property PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// Tcl Message: set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: set_property PROGRAM.FILE {/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/sberday_nexys_a7_svga.bit} [get_hw_devices xc7a100t_0] 
+// Tcl Message: program_hw_devices [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: INFO: [Labtools 27-3164] End of startup status: HIGH 
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_CHANGE
+// TclEventType: HW_DEVICE_UPDATE
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// Tcl Message: refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0] 
+// Tcl Message: INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it. 
+// 'D' command handler elapsed time: 4 seconds
+dismissDialog("Program Device"); // bj (Program Device Progress)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0, true); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree) - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_PROJECT_MANAGER
+// [Engine Memory]: 1,819 MB (+4733kb) [00:02:22]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 02m:26s
+// HMemoryUtils.trashcanNow. Engine heap size: 1,853 MB. GUI used memory: 81 MB. Current time: 11/8/24, 6:35:26 PM MSK
+// Elapsed Time for: 'L.f': 02m:28s
+// Elapsed time: 31 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, sberday_nexys_a7_svga (sberday_nexys_a7_svga.sv), display_ctrl : display_ctrl (display_ctrl.sv)]", 12, false); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, sberday_nexys_a7_svga (sberday_nexys_a7_svga.sv), game_logic : game_logic (game_logic.sv)]", 11, false); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, sberday_nexys_a7_svga (sberday_nexys_a7_svga.sv), game_logic : game_logic (game_logic.sv)]", 11, false); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, sberday_nexys_a7_svga (sberday_nexys_a7_svga.sv), game_logic : game_logic (game_logic.sv)]", 11, false, false, false, false, false, true); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE) - Double Click
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // J (PAResourceOtoP.PAViews_CODE, PlanAheadTabCode)
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// Tcl Message: INFO: [Project 1-1161] Replacing file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.srcs/utils_1/imports/synth_1/sberday_nexys_a7_svga.dcp with file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/sberday_nexys_a7_svga.dcp 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 18:35:40 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 18:35:40 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,897 MB. GUI used memory: 84 MB. Current time: 11/8/24, 6:35:41 PM MSK
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 80 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager, Program Device]", 24, false); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree)
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+selectMenuItem((HResource) null, "xc7a100t_0"); // ap (xc7a100t_0)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HARDWARE_MANAGER
+// Tcl (Dont Echo) Command: 'rdi::info_commands get_hw_probes'
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // u (PAResourceOtoP.PAViews_PROJECT_SUMMARY, PlanAheadTabProject Summary)
+selectButton(PAResourceOtoP.ProgramFpgaDialog_PROGRAM, "Program", "Program Device"); // a (PAResourceOtoP.ProgramFpgaDialog_PROGRAM, RDIResource.BaseDialog_OK)
+// TclEventType: HW_DEVICE_CHANGE
+dismissDialog("Program Device"); // aP (dialog2)
+// Tcl Message: set_property PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// Tcl Message: set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: set_property PROGRAM.FILE {/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/sberday_nexys_a7_svga.bit} [get_hw_devices xc7a100t_0] 
+// Tcl Message: program_hw_devices [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: INFO: [Labtools 27-3164] End of startup status: HIGH 
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_CHANGE
+// TclEventType: HW_DEVICE_UPDATE
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// Tcl Message: refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0] 
+// Tcl Message: INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it. 
+// 'D' command handler elapsed time: 4 seconds
+dismissDialog("Program Device"); // bj (Program Device Progress)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 04m:44s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 04m:46s
+// HMemoryUtils.trashcanNow. Engine heap size: 1,914 MB. GUI used memory: 86 MB. Current time: 11/8/24, 6:37:46 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 04m:48s
+// [Engine Memory]: 1,914 MB (+3748kb) [00:05:06]
+// Elapsed Time for: 'L.f': 04m:50s
+// Elapsed time: 43 seconds
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Elapsed Time for: 'L.f': 04m:52s
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0, true); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree) - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_PROJECT_MANAGER
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// Tcl Message: INFO: [Project 1-1161] Replacing file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.srcs/utils_1/imports/synth_1/sberday_nexys_a7_svga.dcp with file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/sberday_nexys_a7_svga.dcp 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 18:38:05 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 18:38:05 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 86 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager, Program Device]", 24, false); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree)
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+selectMenuItem((HResource) null, "xc7a100t_0"); // ap (xc7a100t_0)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HARDWARE_MANAGER
+// Tcl (Dont Echo) Command: 'rdi::info_commands get_hw_probes'
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // u (PAResourceOtoP.PAViews_PROJECT_SUMMARY, PlanAheadTabProject Summary)
+selectButton(PAResourceOtoP.ProgramFpgaDialog_PROGRAM, "Program", "Program Device"); // a (PAResourceOtoP.ProgramFpgaDialog_PROGRAM, RDIResource.BaseDialog_OK)
+// TclEventType: HW_DEVICE_CHANGE
+dismissDialog("Program Device"); // aP (dialog3)
+// Tcl Message: set_property PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// Tcl Message: set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: set_property PROGRAM.FILE {/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/sberday_nexys_a7_svga.bit} [get_hw_devices xc7a100t_0] 
+// Tcl Message: program_hw_devices [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: INFO: [Labtools 27-3164] End of startup status: HIGH 
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_CHANGE
+// TclEventType: HW_DEVICE_UPDATE
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// Tcl Message: refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0] 
+// Tcl Message: INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it. 
+// 'D' command handler elapsed time: 4 seconds
+dismissDialog("Program Device"); // bj (Program Device Progress)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 08m:12s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 08m:14s
+// Elapsed Time for: 'L.f': 08m:16s
+// HMemoryUtils.trashcanNow. Engine heap size: 1,968 MB. GUI used memory: 90 MB. Current time: 11/8/24, 6:41:16 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 08m:20s
+// Elapsed Time for: 'L.f': 08m:22s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 09m:00s
+// Elapsed Time for: 'L.f': 09m:02s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 09m:06s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,018 MB. GUI used memory: 90 MB. Current time: 11/8/24, 6:42:06 PM MSK
+// [Engine Memory]: 2,018 MB (+8174kb) [00:09:24]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 09m:08s
+// Elapsed Time for: 'L.f': 09m:10s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 09m:12s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 09m:14s
+// Elapsed Time for: 'L.f': 09m:16s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:20s
+// Elapsed Time for: 'L.f': 11m:22s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:32s
+// Elapsed Time for: 'L.f': 11m:34s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,104 MB. GUI used memory: 90 MB. Current time: 11/8/24, 6:44:36 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:40s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:42s
+// [Engine Memory]: 2,130 MB (+11733kb) [00:12:00]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:44s
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 11m:46s
+// Elapsed Time for: 'L.f': 11m:48s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// [GUI Memory]: 167 MB (+899kb) [00:12:39]
+// Elapsed Time for: 'L.f': 12m:22s
+// Elapsed Time for: 'L.f': 12m:24s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 12m:34s
+// Elapsed Time for: 'L.f': 12m:36s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,192 MB. GUI used memory: 91 MB. Current time: 11/8/24, 6:45:36 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 12m:38s
+// Elapsed Time for: 'L.f': 12m:40s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 12m:42s
+// Elapsed Time for: 'L.f': 12m:44s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// [Engine Memory]: 2,244 MB (+7904kb) [00:13:17]
+// Elapsed Time for: 'L.f': 13m:00s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,244 MB. GUI used memory: 91 MB. Current time: 11/8/24, 6:46:01 PM MSK
+// Elapsed Time for: 'L.f': 13m:02s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 17m:36s
+// Elapsed Time for: 'L.f': 17m:38s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 17m:48s
+// Elapsed Time for: 'L.f': 17m:50s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,279 MB. GUI used memory: 91 MB. Current time: 11/8/24, 6:50:51 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 18m:08s
+// Elapsed Time for: 'L.f': 18m:10s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 18m:12s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 18m:14s
+// Elapsed Time for: 'L.f': 18m:16s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,329 MB. GUI used memory: 91 MB. Current time: 11/8/24, 6:51:16 PM MSK
+// Elapsed Time for: 'L.f': 18m:18s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 19m:32s
+// Elapsed Time for: 'L.f': 19m:34s
+// Elapsed time: 778 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0, true); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree) - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_PROJECT_MANAGER
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 19m:42s
+// [Engine Memory]: 2,363 MB (+7380kb) [00:20:00]
+// Elapsed Time for: 'L.f': 19m:44s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 19m:46s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,391 MB. GUI used memory: 93 MB. Current time: 11/8/24, 6:52:46 PM MSK
+// Elapsed Time for: 'L.f': 19m:48s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 19m:52s
+// Elapsed Time for: 'L.f': 19m:54s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 20m:04s
+// Elapsed Time for: 'L.f': 20m:06s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,427 MB. GUI used memory: 93 MB. Current time: 11/8/24, 6:53:06 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 21m:18s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 21m:20s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,453 MB. GUI used memory: 93 MB. Current time: 11/8/24, 6:54:21 PM MSK
+// Elapsed Time for: 'L.f': 21m:22s
+// Elapsed Time for: 'L.f': 21m:24s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 21m:32s
+// Elapsed Time for: 'L.f': 21m:34s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,479 MB. GUI used memory: 93 MB. Current time: 11/8/24, 6:54:36 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 23m:10s
+// [Engine Memory]: 2,495 MB (+14465kb) [00:23:28]
+// HMemoryUtils.trashcanNow. Engine heap size: 2,495 MB. GUI used memory: 94 MB. Current time: 11/8/24, 6:56:11 PM MSK
+// Elapsed Time for: 'L.f': 23m:12s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 23m:20s
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Elapsed Time for: 'L.f': 23m:22s
+// Elapsed Time for: 'L.f': 23m:24s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,527 MB. GUI used memory: 93 MB. Current time: 11/8/24, 6:56:26 PM MSK
+// HMemoryUtils.trashcanNow. Engine heap size: 2,633 MB. GUI used memory: 94 MB. Current time: 11/8/24, 6:58:21 PM MSK
+// HMemoryUtils.trashcanNow. Engine heap size: 2,527 MB. GUI used memory: 94 MB. Current time: 11/8/24, 7:28:21 PM MSK
+// Elapsed time: 2684 seconds
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// Tcl Message: reset_run synth_1 
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: INFO: [Project 1-1161] Replacing file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.srcs/utils_1/imports/synth_1/sberday_nexys_a7_svga.dcp with file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/sberday_nexys_a7_svga.dcp 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 19:37:20 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 19:37:20 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 21 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK", "Synthesis Failed"); // a (RDIResource.BaseDialog_OK)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // Q.a (dialog4)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Analysis Results, sim_1, [HDL 9-1206] Syntax error near 'always_ff' [/home/stud00/hackathon/sberday_nexys_a7_svga/src/rtl/game_logic.sv:61]. ]", 2, false); // u.d (PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Analysis Results, sim_1, [HDL 9-1206] Syntax error near 'always_ff' [/home/stud00/hackathon/sberday_nexys_a7_svga/src/rtl/game_logic.sv:61]. ]", 2, false); // u.d (PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Analysis Results, sim_1, [HDL 9-1206] Syntax error near 'always_ff' [/home/stud00/hackathon/sberday_nexys_a7_svga/src/rtl/game_logic.sv:61]. ]", 2, false, false, false, false, false, true); // u.d (PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE) - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Analysis Results, sim_1, [HDL 9-1206] Syntax error near 'always_ff' [/home/stud00/hackathon/sberday_nexys_a7_svga/src/rtl/game_logic.sv:61]. ]", 2, false); // u.d (PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;/home/stud00/hackathon/sberday_nexys_a7_svga/src/rtl/game_logic.sv;-;;-;16;-;line;-;61;-;;-;16;-;"); // u.d (PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE)
+selectCodeEditor("game_logic.sv", 126, 212); // ac (game_logic.sv)
+// Elapsed time: 117 seconds
+selectCodeEditor("game_logic.sv", 89, 217); // ac (game_logic.sv)
+// Elapsed time: 40 seconds
+selectCodeEditor("game_logic.sv", 87, 136); // ac (game_logic.sv)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:07m:58s
+// Elapsed Time for: 'L.f': 01h:08m:00s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:04s
+// Elapsed time: 27 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// Elapsed Time for: 'L.f': 01h:08m:06s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:26s
+// [Engine Memory]: 2,624 MB (+4236kb) [01:08:44]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:28s
+// Elapsed Time for: 'L.f': 01h:08m:30s
+// Elapsed Time for: 'L.f': 01h:08m:32s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:36s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,670 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:41:36 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:38s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:40s
+// Elapsed Time for: 'L.f': 01h:08m:42s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:44s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:46s
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:48s
+// Elapsed Time for: 'L.f': 01h:08m:50s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,740 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:41:51 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:54s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:08m:56s
+// [Engine Memory]: 2,758 MB (+3250kb) [01:09:14]
+// Elapsed Time for: 'L.f': 01h:08m:58s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:08s
+// Elapsed Time for: 'L.f': 01h:09m:10s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:14s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:16s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,813 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:42:16 PM MSK
+// Elapsed Time for: 'L.f': 01h:09m:18s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:20s
+// Elapsed Time for: 'L.f': 01h:09m:22s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:24s
+// Elapsed Time for: 'L.f': 01h:09m:26s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:28s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:30s
+// Tcl Message: update_compile_order -fileset sources_1 
+// HMemoryUtils.trashcanNow. Engine heap size: 2,877 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:42:31 PM MSK
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:32s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// [Engine Memory]: 2,903 MB (+7341kb) [01:09:51]
+// Elapsed Time for: 'L.f': 01h:09m:34s
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed Time for: 'L.f': 01h:09m:36s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:38s
+// Elapsed Time for: 'L.f': 01h:09m:40s
+// Elapsed Time for: 'L.f': 01h:09m:42s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:44s
+// Elapsed Time for: 'L.f': 01h:09m:46s
+// HMemoryUtils.trashcanNow. Engine heap size: 2,949 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:42:46 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:09m:56s
+// Elapsed Time for: 'L.f': 01h:09m:58s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:10m:06s
+// Elapsed Time for: 'L.f': 01h:10m:08s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:10m:12s
+// Elapsed Time for: 'L.f': 01h:10m:14s
+// HMemoryUtils.trashcanNow. Engine heap size: 3,003 MB. GUI used memory: 78 MB. Current time: 11/8/24, 7:43:16 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:10m:46s
+// Elapsed Time for: 'L.f': 01h:10m:48s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:10m:54s
+// Elapsed Time for: 'L.f': 01h:10m:56s
+// HMemoryUtils.trashcanNow. Engine heap size: 3,039 MB. GUI used memory: 79 MB. Current time: 11/8/24, 7:43:56 PM MSK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:10m:58s
+// Elapsed Time for: 'L.f': 01h:11m:00s
+// [Engine Memory]: 3,171 MB (+128939kb) [01:11:18]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:11m:04s
+// Elapsed Time for: 'L.f': 01h:11m:06s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:11m:14s
+// Elapsed time: 190 seconds
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 19:44:15 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 19:44:15 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// Elapsed Time for: 'L.f': 01h:11m:18s
+// TclEventType: RUN_STATUS_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 3,201 MB. GUI used memory: 79 MB. Current time: 11/8/24, 7:44:21 PM MSK
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// Elapsed time: 18 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK", "Synthesis Failed"); // a (RDIResource.BaseDialog_OK)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // Q.a (dialog5)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:11m:46s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:11m:48s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:11m:50s
+// Elapsed Time for: 'L.f': 01h:11m:52s
+// Elapsed Time for: 'L.f': 01h:11m:54s
+// Elapsed time: 18 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:12m:08s
+// Elapsed time: 14 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// Elapsed Time for: 'L.f': 01h:12m:10s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:12m:34s
+// Elapsed time: 25 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// Elapsed Time for: 'L.f': 01h:12m:36s
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 19:45:38 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 19:45:38 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 86 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager, Program Device]", 24, false); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree)
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+selectMenuItem((HResource) null, "xc7a100t_0"); // ap (xc7a100t_0)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HARDWARE_MANAGER
+// Tcl (Dont Echo) Command: 'rdi::info_commands get_hw_probes'
+// Run Command: PAResourceCommand.PACommandNames_PROGRAM_FPGA
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // u (PAResourceOtoP.PAViews_PROJECT_SUMMARY, PlanAheadTabProject Summary)
+selectButton(PAResourceOtoP.ProgramFpgaDialog_PROGRAM, "Program", "Program Device"); // a (PAResourceOtoP.ProgramFpgaDialog_PROGRAM, RDIResource.BaseDialog_OK)
+// TclEventType: HW_DEVICE_CHANGE
+dismissDialog("Program Device"); // aP (dialog6)
+// Tcl Message: set_property PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// Tcl Message: set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: set_property PROGRAM.FILE {/home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/sberday_nexys_a7_svga.bit} [get_hw_devices xc7a100t_0] 
+// Tcl Message: program_hw_devices [get_hw_devices xc7a100t_0] 
+// TclEventType: HW_DEVICE_CHANGE
+// Tcl Message: INFO: [Labtools 27-3164] End of startup status: HIGH 
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_SYSMON_CHANGE
+// TclEventType: HW_DEVICE_UPDATE
+// TclEventType: HW_DEVICE_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: HW_DEVICE_PROBES_CHANGE
+// Tcl Message: refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0] 
+// Tcl Message: INFO: [Labtools 27-1434] Device xc7a100t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it. 
+// 'D' command handler elapsed time: 4 seconds
+dismissDialog("Program Device"); // bj (Program Device Progress)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:17m:44s
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:17m:46s
+// Elapsed Time for: 'L.f': 01h:17m:48s
+// Elapsed time: 217 seconds
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+selectButton(PAResourceAtoD.AbstractFileView_RELOAD, "Reload"); // g (PAResourceAtoD.AbstractFileView_RELOAD)
+// HMemoryUtils.trashcanNow. Engine heap size: 3,241 MB. GUI used memory: 81 MB. Current time: 11/8/24, 7:50:51 PM MSK
+selectButton(PAResourceCommand.PACommandNames_RUN_BITGEN, "run_bitstream"); // B (PAResourceCommand.PACommandNames_RUN_BITGEN, run_bitstream)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// Tcl Message: INFO: [Project 1-1161] Replacing file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.srcs/utils_1/imports/synth_1/sberday_nexys_a7_svga.dcp with file /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/sberday_nexys_a7_svga.dcp 
+dismissDialog("Resetting Runs"); // bj (Resetting Runs Progress)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 6 
+// Tcl Message: [Fri Nov  8 19:50:52 2024] Launched synth_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/synth_1/runme.log [Fri Nov  8 19:50:52 2024] Launched impl_1... Run output will be captured here: /home/stud00/hackathon/sberday_nexys_a7_svga/vivado/sberday_nexys_a7_svga.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 01h:19m:00s
+// HMemoryUtils.trashcanNow. Engine heap size: 3,248 MB. GUI used memory: 81 MB. Current time: 11/8/24, 7:52:01 PM MSK
+// Elapsed Time for: 'L.f': 01h:19m:02s
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
