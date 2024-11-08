@@ -42,10 +42,10 @@ module game_logic (
     logic  [9:0] ball_x;
     logic  [9:0] ball_y;
 
-    logic  [9:0] speed_x;
-    logic  [9:0] speed_y;
+    logic signed [9:0] speed_x;
+    logic signed [9:0] speed_y;
 
-    parameter DECEL = 10'd1;
+    parameter signed DECEL = 10'd1;
 
     
     //   0 1         X
@@ -65,10 +65,10 @@ module game_logic (
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x <= 10'd400;
-      ball_y <= 10'd300;
-      speed_x <= 10'd0;
-      speed_y <= 10'd0;
+      ball_x <= 400;
+      ball_y <= 300;
+      speed_x <= 0;
+      speed_y <= 0;
     end
     else if ( end_of_frame ) begin
       if (button_l)
@@ -82,14 +82,18 @@ module game_logic (
       ball_x <= ball_x + speed_x;
       ball_y <= ball_y + speed_y;
       if ( frames_cntr == 0 ) begin
-        if (speed_x < DECEL)
-          speed_x <= 10'd0;
-        else
+        if (speed_x > 0)
           speed_x <= speed_x - DECEL;
-        if (speed_y < DECEL)
-          speed_y <= 10'd0;
         else
+          speed_x <= speed_x + DECEL;
+        if (speed_y > 0)
           speed_y <= speed_y - DECEL;
+        else
+          speed_y <= speed_y + DECEL;
+        if (-DECEL < speed_x && speed_x < DECEL)
+          speed_x <= 0;
+        if (-DECEL < speed_y && speed_y < DECEL)
+          speed_y <= 0;
       end
     end
   end
