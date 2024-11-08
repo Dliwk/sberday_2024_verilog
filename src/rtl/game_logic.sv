@@ -29,7 +29,7 @@ module game_logic (
 
 //------------------------- Variables                    ----------------------------//
   //----------------------- Counters                     --------------------------//
-    parameter         FRAMES_PER_ACTION = 2;  // Action delay
+    parameter         FRAMES_PER_ACTION = 5;  // Action delay
     logic     [31:0]  frames_cntr ;
     logic             end_of_frame;           // End of frame's active zone
   //----------------------- Accelerometr                 --------------------------//
@@ -65,24 +65,32 @@ module game_logic (
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x <= 10'd300;
-      ball_y <= 10'd400;
-      speed_x <= 10'd1;
+      ball_x <= 10'd400;
+      ball_y <= 10'd300;
+      speed_x <= 10'd0;
       speed_y <= 10'd0;
     end
     else if ( end_of_frame ) begin
       if (button_l)
-        speed_x <= 60;
+        speed_x <= speed_x - 1;
+      if (button_r)
+        speed_x <= speed_x + 1;
+      if (button_u)
+        speed_y <= speed_y - 1;
+      if (button_d)
+        speed_y <= speed_y + 1;
       ball_x <= ball_x + speed_x;
       ball_y <= ball_y + speed_y;
-      //if (speed_x < DECEL)
-      //  speed_x <= 10'd0;
-      //else
-      //  speed_x <= speed_x - DECEL;
-      //if (speed_y < DECEL)
-      //  speed_y <= 10'd0;
-      //else
-      //  speed_y <= speed_y - DECEL;
+      if ( frames_cntr == 0 ) begin
+        if (speed_x < DECEL)
+          speed_x <= 10'd0;
+        else
+          speed_x <= speed_x - DECEL;
+        if (speed_y < DECEL)
+          speed_y <= 10'd0;
+        else
+          speed_y <= speed_y - DECEL;
+      end
     end
   end
 
@@ -123,7 +131,7 @@ module game_logic (
     logic draw_ball;
 
   always @ (posedge pixel_clk ) begin
-    draw_ball <= (v_coord - ball_x) * (v_coord - ball_x) + (h_coord - ball_y) * (h_coord - ball_y) < 100;
+    draw_ball <= (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
   end
 
 //------------- RGB MUX outputs                                  -------------//
