@@ -1,4 +1,4 @@
-module sberday_nexys_a7_svga (
+module sberday_2024_verilog (
   //----------- CLOCK                                            -------------//
     input   logic            CLK100MHZ ,
   //----------- Switches                                         -------------//

@@ -125,12 +125,12 @@ endfunction
     assign map_coll_read_address = ball_y * 800 + {8'b0, ball_x};
     assign map_tex_read_address = v_coord * 800 + {8'b0, h_coord};
     map_0_x_rom map_0_x_rom (
-     .addr   (map_coll_read_address),
-     .data   (map_0_x_coll_out)
+      .addr   (map_coll_read_address),
+      .data   (map_0_x_coll_out)
     );
     map_0_y_rom map_0_y_rom (
-     .addr   (map_coll_read_address),
-     .data   (map_0_y_coll_out)
+      .addr   (map_coll_read_address),
+      .data   (map_0_y_coll_out)
     );
     map_0_tex_rom map_0_tex_rom (
       .addr   (map_tex_read_address),
@@ -151,10 +151,10 @@ endfunction
     // );
 
     assign victory_screen_read_address = v_coord * 800 + {8'b0, h_coord};
-    victory_screen_rom victory_screen_rom (
-      .addr   (victory_screen_read_address),
-      .data   (victory_screen_color)
-    );
+    //victory_screen_rom victory_screen_rom (
+    //  .addr   (victory_screen_read_address),
+    //  .data   (victory_screen_color)
+    //);
 
     wire map_coll_x;
     wire map_coll_y;
@@ -181,7 +181,8 @@ endfunction
       arrow_len2 = 0;
     end
     else if ( end_of_frame ) begin
-      arrow_len2 = (speed_x * speed_x + speed_y * speed_y);
+      // arrow_len2 = (speed_x * speed_x + speed_y * speed_y);
+      arrow_len2 = 256;
       if (map_coll_x)
         speed_x = -speed_x;
       if (map_coll_y)
@@ -287,12 +288,14 @@ endfunction
   logic               draw_arrow_orientation;
   logic               victory = 0;
   logic               draw_finish = 0;
+  logic               draw_arrow_point;
+
   always @ (posedge pixel_clk ) begin
+    arrow_x = {accel_x_end_of_frame, 4'b0} / 16;
+    arrow_y = {accel_y_end_of_frame, 4'b0} / 16;
+
     draw_ball = dist2(h_coord, v_coord, ball_x, ball_y) < 100;
     //draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
-
-    arrow_x = speed_x;
-    arrow_y = speed_y;
 
     map_tex_color = (map_tex ? 12'h0f0 : 12'h000);
     draw_arrow_length = dist2(h_coord, v_coord, ball_x, ball_y) < arrow_len2 * 4;
@@ -300,17 +303,19 @@ endfunction
                                    ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord));
     draw_arrow_direction = (triangle_square * triangle_square / arrow_len2) < 16;
     draw_arrow_orientation = dotP(arrow_x, arrow_y,
-                                    h_coord - ball_x, v_coord - ball_y) >= 0;
+                                  h_coord - ball_x, v_coord - ball_y) >= 0;
                                     //v_coord - arrow_y - ball_y, ball_x + arrow_y - h_coord) < 0;
 
     draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
+    draw_arrow_point = dist2(h_coord, v_coord, ball_x + arrow_x, ball_y + arrow_y) < 49;
 
     draw_finish = dist2(h_coord, v_coord, finish_x, finish_y) < 324;
 
     current_color = 
-        victory     ? victory_screen_color :
-        draw_arrow  ? 12'hf00 :
-        draw_ball   ? 12'hfff : 
+        victory          ? victory_screen_color :
+        draw_arrow       ? 12'hf00 :
+        draw_arrow_point ? 12'hf00 :
+        draw_ball        ? 12'hfff : 
         draw_finish   ? 12'ha34 : 
         map_tex_color;
   end
