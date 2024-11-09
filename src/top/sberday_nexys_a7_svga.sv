@@ -146,7 +146,58 @@ module sberday_2024_verilog (
       .don_active_n           ( DP                           ),
       .anodes                 ( AN                           )
     );
-    assign sevseg_32bit_hex_val = {8'b0, accel_x_end_of_frame, 8'b0, accel_y_end_of_frame}; //32'hDEADBEEF;
+    //assign sevseg_32bit_hex_val = {8'b0, accel_x_end_of_frame, 8'b0, accel_y_end_of_frame}; //32'hDEADBEEF;
+    // assign sevseg_32bit_hex_val = {8'b0, accel_x_end_of_frame, 8'b0, accel_y_end_of_frame}; //32'hDEADBEEF;
+
+    // assign sevseg_32bit_hex_val = {8'b0, accel_x_end_of_frame, 8'b0, accel_y_end_of_frame}; //32'hDEADBEEF;
+
+    reg [25:0] one_sec_counter; // 36 MHz clock divided to ~1 Hz
+    reg timer_enable;
+    reg [5:0] seconds;
+    reg [5:0] minutes;
+
+    // timer
+    always_ff @(posedge pixel_clk or negedge rst_n) begin
+      if (!rst_n) begin
+        one_sec_counter <= 0;
+        seconds <= 0;
+        minutes <= 0;
+        timer_enable <= 1'b1;
+      end else if (timer_enable) begin
+        if (one_sec_counter < 25_200_000 - 1) begin
+        // if (one_sec_counter < 3600 - 1) begin
+          one_sec_counter <= one_sec_counter + 1;
+        end else begin
+          one_sec_counter <= 0;
+          if (seconds < 59) begin
+            seconds <= seconds + 1;
+          end else begin
+            seconds <= 0;
+            if (minutes < 99) begin
+              minutes <= minutes + 1;
+            end else begin
+              minutes <= 0;
+            end
+          end
+        end
+      end
+    end
+
+    wire [3:0] seconds_units = seconds % 10;
+    wire [3:0] seconds_tens = seconds / 10;
+    wire [3:0] minutes_units = minutes % 10;
+    wire [3:0] minutes_tens = minutes / 10;
+
+    // mmss format
+    assign sevseg_32bit_hex_val = {
+      8'b0,
+      8'b0,
+      minutes_tens,
+      minutes_units,
+      seconds_tens,
+      seconds_units
+    };
+    
   //----------- Accelerometer                                    -----------//
     accelerometr_ctrl accelerometr_ctrl (
       //Clocks & Resets

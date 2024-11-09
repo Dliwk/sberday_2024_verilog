@@ -74,6 +74,34 @@ begin
 end
 endfunction
 
+//function real rsqrt;
+  //input real x;
+//begin
+  //rsqrt = (16 * x * x * x + 448 * x * x + 1792 * x + 1024) / (x * x * x * x + 112 * x * x * x + 1120 * x * x + 1792 * x + 256);
+  /* What the fuck? */
+//end
+//endfunction
+
+logic [5:0] i;
+logic [19:0] l;
+logic [19:0] r;
+logic [19:0] m;
+
+function logic signed [9:0] sqrt;
+  input logic signed [19:0] x;
+begin
+  l = 1;
+  r = 20000;
+  for (i = 0; i < 22; i++) begin
+    m = (l + r) / 2;
+    if (m * m > {10'b0, x})
+      r = m;
+    else
+      l = m;
+  end
+  sqrt = l;
+end
+endfunction
 
 //------------------------- Variables                    ----------------------------//
   //----------------------- Counters                     --------------------------//
@@ -110,7 +138,7 @@ endfunction
 
     wire        map_1_x_coll_out;
     wire        map_1_y_coll_out;
-    wire        map_1_tex_out;
+    wire [11:0] map_1_tex_out;
     
     //   0 1         X
     //  +------------->
@@ -137,28 +165,28 @@ endfunction
       .data   (map_0_tex_out)
     );
 
-    // map_1_x_extended_rom map_1_x_extended_rom (
-    //   .addr   (map_coll_read_address),
-    //   .data   (map_1_x_coll_out)
-    // );
-    // map_1_y_extended_rom map_1_y_extended_rom (
-    //   .addr   (map_coll_read_address),
-    //   .data   (map_1_y_coll_out)
-    // );
-    // map_1_xy_rom map_1_xy_rom (
-    //   .addr   (map_tex_read_address),
-    //   .data   (map_1_tex_out)
-    // );
+    /*map_1_x_extended_rom map_1_x_extended_rom (
+      .addr   (map_coll_read_address),
+      .data   (map_1_x_coll_out)
+    );
+    map_1_y_extended_rom map_1_y_extended_rom (
+      .addr   (map_coll_read_address),
+      .data   (map_1_y_coll_out)
+    );
+    map_1_xy_rom map_1_xy_rom (
+      .addr   (map_tex_read_address),
+      .data   (map_1_tex_out)
+    );*/
 
     assign victory_screen_read_address = v_coord * 800 + {8'b0, h_coord};
-    //victory_screen_rom victory_screen_rom (
-    //  .addr   (victory_screen_read_address),
-    //  .data   (victory_screen_color)
-    //);
+    /*victory_screen_rom victory_screen_rom (
+      .addr   (victory_screen_read_address),
+      .data   (victory_screen_color)
+    );*/
 
     wire map_coll_x;
     wire map_coll_y;
-    wire map_tex;
+    wire map_tex;  // TODO
 
     assign map_coll_x = map_0_x_coll_out;
     assign map_coll_y = map_0_y_coll_out;
@@ -167,21 +195,32 @@ endfunction
     //assign hor_collide = map_coll_y;
     
     logic [19:0] arrow_len2;
+
+    logic ball_idle;
   
   // ----------------------------- ball movement --------------------- //
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x = 400;
-      ball_y = 300;
-      finish_x = 600;
-      finish_y = 400;
+      ball_x = 200;
+      ball_y = 500;
+      finish_x = 400;
+      finish_y = 80;
       speed_x = 0;
       speed_y = 0;
       arrow_len2 = 0;
+      ball_idle = 0;
+      victory = 0;
+      ball_idle = 1;
     end
     else if ( end_of_frame ) begin
       // arrow_len2 = (speed_x * speed_x + speed_y * speed_y);
+
+      if (speed_x == 0 && speed_y == 0)
+        ball_idle = 0;
+      else
+        ball_idle = 1;
+
       arrow_len2 = 256;
       if (map_coll_x)
         speed_x = -speed_x;
@@ -198,6 +237,11 @@ endfunction
         speed_y = speed_y - 1;
       if (button_d)
         speed_y = speed_y + 1;
+      if (button_c && ball_idle) begin
+        ball_idle = 0;
+        speed_x = arrow_x;
+        speed_y = arrow_y;
+      end
 
       if ( frames_cntr == 0 ) begin
         if (-DECEL <= speed_x && speed_x <= DECEL)
@@ -229,7 +273,7 @@ endfunction
           speed_y = speed_y + DECEL;
       end
 
-      if (dist2(ball_x, ball_y, finish_x, finish_y) < 81 && (speed_x * speed_x + speed_y * speed_y) < 36) begin
+      if (dist2(ball_x, ball_y, finish_x, finish_y) < 400 && (speed_x * speed_x + speed_y * speed_y) < 36) begin
         victory = 1;
       end
     end
@@ -289,15 +333,21 @@ endfunction
   logic               victory = 0;
   logic               draw_finish = 0;
   logic               draw_arrow_point;
+  logic [9:0]         sqrt_arrow;
 
   always @ (posedge pixel_clk ) begin
-    arrow_x = {accel_x_end_of_frame, 4'b0} / 16;
-    arrow_y = {accel_y_end_of_frame, 4'b0} / 16;
+    arrow_x = $signed({accel_y_end_of_frame, 4'b0}) / 20;
+    arrow_y = $signed({accel_x_end_of_frame, 4'b0}) / 20;
+    // sqrt_arrow = sqrt((dist2(0, 0, arrow_x, arrow_y)));
+    // arrow_x = arrow_x * 10 / sqrt_arrow;
+    // arrow_y = arrow_y * 10 / sqrt_arrow;
 
     draw_ball = dist2(h_coord, v_coord, ball_x, ball_y) < 100;
     //draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
 
+// TODO
     map_tex_color = (map_tex ? 12'h0f0 : 12'h000);
+    // map_tex_color = map_tex;
     draw_arrow_length = dist2(h_coord, v_coord, ball_x, ball_y) < arrow_len2 * 4;
     triangle_square = abs20(crossP(ball_x           - h_coord, ball_y           - v_coord,
                                    ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord));
@@ -307,13 +357,14 @@ endfunction
                                     //v_coord - arrow_y - ball_y, ball_x + arrow_y - h_coord) < 0;
 
     draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
-    draw_arrow_point = dist2(h_coord, v_coord, ball_x + arrow_x, ball_y + arrow_y) < 49;
+    draw_arrow_point = dist2(h_coord, v_coord, ball_x + arrow_x, ball_y + arrow_y) < 49
+        && ball_idle;
 
     draw_finish = dist2(h_coord, v_coord, finish_x, finish_y) < 324;
 
     current_color = 
         victory          ? victory_screen_color :
-        draw_arrow       ? 12'hf00 :
+        // draw_arrow       ? 12'hf00 :
         draw_arrow_point ? 12'hf00 :
         draw_ball        ? 12'hfff : 
         draw_finish   ? 12'ha34 : 
