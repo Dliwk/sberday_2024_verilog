@@ -95,11 +95,19 @@ endfunction
 
     parameter signed DECEL = 10'd1;
 
+    wire [18:0] victory_screen_read_address;
+    wire [11:0] victory_screen_color;
+
+    wire [18:0] map_coll_read_address;
+    wire [18:0] map_tex_read_address;
+
     wire        map_0_x_coll_out;
     wire        map_0_y_coll_out;
-    wire [18:0] map_coll_read_address;
     wire        map_0_tex_out;
-    wire [18:0] map_tex_read_address;
+
+    wire        map_1_x_coll_out;
+    wire        map_1_y_coll_out;
+    wire        map_1_tex_out;
     
     //   0 1         X
     //  +------------->
@@ -113,27 +121,45 @@ endfunction
 
     assign map_coll_read_address = ball_y * 800 + {8'b0, ball_x};
     assign map_tex_read_address = v_coord * 800 + {8'b0, h_coord};
-    //assign map_read_address = v_coord * 800 + {8'b0, h_coord};
-    map_0_x_rom map_0_x_rom (
+    //map_0_x_rom map_0_x_rom (
+    //  .addr   (map_coll_read_address),
+    //  .data   (map_0_x_coll_out)
+    //);
+    //map_0_y_rom map_0_y_rom (
+    //  .addr   (map_coll_read_address),
+    //  .data   (map_0_y_coll_out)
+    //);
+    //map_0_tex_rom map_0_tex_rom (
+    //  .addr   (map_tex_read_address),
+    //  .data   (map_0_tex_out)
+    //);
+
+    map_1_x_extended_rom map_1_x_extended_rom (
       .addr   (map_coll_read_address),
-      .data   (map_0_x_coll_out)
+      .data   (map_1_x_coll_out)
     );
-    map_0_y_rom map_0_y_rom (
+    map_1_y_extended_rom map_1_y_extended_rom (
       .addr   (map_coll_read_address),
-      .data   (map_0_y_coll_out)
+      .data   (map_1_y_coll_out)
     );
-    map_0_tex_rom map_0_tex_rom (
+    map_1_xy_rom map_1_xy_rom (
       .addr   (map_tex_read_address),
-      .data   (map_0_tex_out)
+      .data   (map_1_tex_out)
+    );
+
+    assign victory_screen_read_address = v_coord * 800 + {8'b0, h_coord};
+    victory_screen_rom victory_screen_rom (
+      .addr   (victory_screen_read_address),
+      .data   (victory_screen_color)
     );
 
     wire map_coll_x;
     wire map_coll_y;
     wire map_tex;
 
-    assign map_coll_x = map_0_x_coll_out;
-    assign map_coll_y = map_0_y_coll_out;
-    assign map_tex = map_0_tex_out;
+    assign map_coll_x = map_1_x_coll_out;
+    assign map_coll_y = map_1_y_coll_out;
+    assign map_tex = map_1_tex_out;
     //assign ver_collide = map_coll_x;
     //assign hor_collide = map_coll_y;
     
@@ -246,6 +272,7 @@ endfunction
   logic               draw_arrow;
   logic [11:0]        current_color;
   logic               draw_arrow_orientation;
+  logic               victory = 1;
 
   always @ (posedge pixel_clk ) begin
     draw_ball = dist2(h_coord, v_coord, ball_x, ball_y) < 100;
@@ -266,14 +293,15 @@ endfunction
     draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
 
     current_color = 
-                    draw_arrow ? 12'hf00 :
-                    draw_ball ? 12'hfff : 
-                    map_tex_color;
+        victory     ? victory_screen_color :
+        draw_arrow  ? 12'hf00 :
+        draw_ball   ? 12'hfff : 
+        map_tex_color;
   end
 
-  assign red   = current_color[3:0];
+  assign red  = current_color[11:8];
   assign green = current_color[7:4];
-  assign blue  = current_color[11:8];
+  assign blue   = current_color[3:0];
   //assign  red      = (draw_ball ? 4'hf : (map_tex ? 4'hf : 4'h0));
   //assign  green    = (draw_ball ? 4'hf : 4'h0);
   //assign  blue     = (draw_ball ? 4'hf : 4'h0);
