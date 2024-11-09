@@ -27,7 +27,7 @@ module game_logic (
     input  wire  [2:0]    SW        
 );
 
-function logic signed [19:0] dist2;
+function logic signed [20:0] dist2;
 //function logic signed [9:0] dist2;
   input logic signed [9:0] x1;
   input logic signed [9:0] y1;
@@ -90,6 +90,9 @@ endfunction
     logic  [9:0] ball_x;
     logic  [9:0] ball_y;
 
+    logic [9:0] finish_x;
+    logic [9:0] finish_y;
+
     logic signed [9:0] speed_x;
     logic signed [9:0] speed_y;
 
@@ -121,31 +124,31 @@ endfunction
 
     assign map_coll_read_address = ball_y * 800 + {8'b0, ball_x};
     assign map_tex_read_address = v_coord * 800 + {8'b0, h_coord};
-    //map_0_x_rom map_0_x_rom (
-    //  .addr   (map_coll_read_address),
-    //  .data   (map_0_x_coll_out)
-    //);
-    //map_0_y_rom map_0_y_rom (
-    //  .addr   (map_coll_read_address),
-    //  .data   (map_0_y_coll_out)
-    //);
-    //map_0_tex_rom map_0_tex_rom (
-    //  .addr   (map_tex_read_address),
-    //  .data   (map_0_tex_out)
-    //);
-
-    map_1_x_extended_rom map_1_x_extended_rom (
-      .addr   (map_coll_read_address),
-      .data   (map_1_x_coll_out)
+    map_0_x_rom map_0_x_rom (
+     .addr   (map_coll_read_address),
+     .data   (map_0_x_coll_out)
     );
-    map_1_y_extended_rom map_1_y_extended_rom (
-      .addr   (map_coll_read_address),
-      .data   (map_1_y_coll_out)
+    map_0_y_rom map_0_y_rom (
+     .addr   (map_coll_read_address),
+     .data   (map_0_y_coll_out)
     );
-    map_1_xy_rom map_1_xy_rom (
+    map_0_tex_rom map_0_tex_rom (
       .addr   (map_tex_read_address),
-      .data   (map_1_tex_out)
+      .data   (map_0_tex_out)
     );
+
+    // map_1_x_extended_rom map_1_x_extended_rom (
+    //   .addr   (map_coll_read_address),
+    //   .data   (map_1_x_coll_out)
+    // );
+    // map_1_y_extended_rom map_1_y_extended_rom (
+    //   .addr   (map_coll_read_address),
+    //   .data   (map_1_y_coll_out)
+    // );
+    // map_1_xy_rom map_1_xy_rom (
+    //   .addr   (map_tex_read_address),
+    //   .data   (map_1_tex_out)
+    // );
 
     assign victory_screen_read_address = v_coord * 800 + {8'b0, h_coord};
     victory_screen_rom victory_screen_rom (
@@ -157,9 +160,9 @@ endfunction
     wire map_coll_y;
     wire map_tex;
 
-    assign map_coll_x = map_1_x_coll_out;
-    assign map_coll_y = map_1_y_coll_out;
-    assign map_tex = map_1_tex_out;
+    assign map_coll_x = map_0_x_coll_out;
+    assign map_coll_y = map_0_y_coll_out;
+    assign map_tex = map_0_tex_out;
     //assign ver_collide = map_coll_x;
     //assign hor_collide = map_coll_y;
     
@@ -169,8 +172,10 @@ endfunction
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x = 200;
+      ball_x = 400;
       ball_y = 300;
+      finish_x = 600;
+      finish_y = 400;
       speed_x = 0;
       speed_y = 0;
       arrow_len2 = 0;
@@ -208,16 +213,24 @@ endfunction
           speed_y = speed_y + DECEL;
       end
 
+      if (dist2(ball_x, ball_y, finish_x, finish_y) < 144) begin
+        if (-DECEL <= speed_x && speed_x <= DECEL)
+          speed_x = 0;
+        if (-DECEL <= speed_y && speed_y <= DECEL)
+          speed_y = 0;
+        if (speed_x > 0)
+          speed_x = speed_x - DECEL;
+        else if (speed_x < 0)
+          speed_x = speed_x + DECEL;
+        if (speed_y > 0)
+          speed_y = speed_y - DECEL;
+        else if (speed_y < 0)
+          speed_y = speed_y + DECEL;
+      end
 
-      // FIXME: normalize
-      if (speed_x > 20)
-        speed_x = 20;
-      if (speed_x < -20)
-        speed_x = -20;
-      if (speed_y > 20)
-        speed_y = 20;
-      if (speed_y < -20)
-        speed_y = -20;
+      if (dist2(ball_x, ball_y, finish_x, finish_y) < 81 && (speed_x * speed_x + speed_y * speed_y) < 36) begin
+        victory = 1;
+      end
     end
   end
 
@@ -272,8 +285,8 @@ endfunction
   logic               draw_arrow;
   logic [11:0]        current_color;
   logic               draw_arrow_orientation;
-  logic               victory = 1;
-
+  logic               victory = 0;
+  logic               draw_finish = 0;
   always @ (posedge pixel_clk ) begin
     draw_ball = dist2(h_coord, v_coord, ball_x, ball_y) < 100;
     //draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
@@ -292,10 +305,13 @@ endfunction
 
     draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
 
+    draw_finish = dist2(h_coord, v_coord, finish_x, finish_y) < 324;
+
     current_color = 
         victory     ? victory_screen_color :
         draw_arrow  ? 12'hf00 :
         draw_ball   ? 12'hfff : 
+        draw_finish   ? 12'ha34 : 
         map_tex_color;
   end
 
