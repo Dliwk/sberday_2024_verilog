@@ -259,9 +259,9 @@ endfunction
     triangle_square = abs20(crossP(ball_x           - h_coord, ball_y           - v_coord,
                                    ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord));
     draw_arrow_direction = (triangle_square * triangle_square / arrow_len2) < 16;
-    draw_arrow_orientation = crossP(ball_x           - h_coord, ball_y           - v_coord,
-                                    // ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord) < 0;
-                                    v_coord - arrow_y - ball_y, ball_x + arrow_y - h_coord) < 0;
+    draw_arrow_orientation = dotP(arrow_x, arrow_y,
+                                    h_coord - ball_x, v_coord - ball_y) >= 0;
+                                    //v_coord - arrow_y - ball_y, ball_x + arrow_y - h_coord) < 0;
 
     draw_arrow = draw_arrow_length & draw_arrow_direction & draw_arrow_orientation;
 
