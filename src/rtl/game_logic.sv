@@ -152,7 +152,7 @@ endfunction
 
     assign map_coll_read_address = ball_y * 800 + {8'b0, ball_x};
     assign map_tex_read_address = v_coord * 800 + {8'b0, h_coord};
-    map_0_x_rom map_0_x_rom (
+    /*map_0_x_rom map_0_x_rom (
       .addr   (map_coll_read_address),
       .data   (map_0_x_coll_out)
     );
@@ -163,9 +163,9 @@ endfunction
     map_0_tex_rom map_0_tex_rom (
       .addr   (map_tex_read_address),
       .data   (map_0_tex_out)
-    );
+    );*/
 
-    /*map_1_x_extended_rom map_1_x_extended_rom (
+    map_1_x_extended_rom map_1_x_extended_rom (
       .addr   (map_coll_read_address),
       .data   (map_1_x_coll_out)
     );
@@ -176,21 +176,22 @@ endfunction
     map_1_xy_rom map_1_xy_rom (
       .addr   (map_tex_read_address),
       .data   (map_1_tex_out)
-    );*/
+    );
 
     assign victory_screen_read_address = v_coord * 800 + {8'b0, h_coord};
-    /*victory_screen_rom victory_screen_rom (
+    victory_screen_rom victory_screen_rom (
       .addr   (victory_screen_read_address),
       .data   (victory_screen_color)
-    );*/
+    );
 
     wire map_coll_x;
     wire map_coll_y;
-    wire map_tex;  // TODO
+    //wire map_tex;  // TODO
+    wire [11:0] map_tex;
 
-    assign map_coll_x = map_0_x_coll_out;
-    assign map_coll_y = map_0_y_coll_out;
-    assign map_tex = map_0_tex_out;
+    assign map_coll_x = map_1_x_coll_out;
+    assign map_coll_y = map_1_y_coll_out;
+    assign map_tex = map_1_tex_out;
     //assign ver_collide = map_coll_x;
     //assign hor_collide = map_coll_y;
     
@@ -202,7 +203,7 @@ endfunction
 
   always_ff @ ( posedge pixel_clk ) begin
     if ( !rst_n ) begin
-      ball_x = 200;
+      ball_x = 400;
       ball_y = 500;
       finish_x = 400;
       finish_y = 80;
@@ -217,9 +218,9 @@ endfunction
       // arrow_len2 = (speed_x * speed_x + speed_y * speed_y);
 
       if (speed_x == 0 && speed_y == 0)
-        ball_idle = 0;
-      else
         ball_idle = 1;
+      else
+        ball_idle = 0;
 
       arrow_len2 = 256;
       if (map_coll_x)
@@ -346,8 +347,8 @@ endfunction
     //draw_ball = (h_coord - ball_x) * (h_coord - ball_x) + (v_coord - ball_y) * (v_coord - ball_y) < 100;
 
 // TODO
-    map_tex_color = (map_tex ? 12'h0f0 : 12'h000);
-    // map_tex_color = map_tex;
+    // map_tex_color = (map_tex ? 12'h0f0 : 12'h000);
+    map_tex_color = map_tex;
     draw_arrow_length = dist2(h_coord, v_coord, ball_x, ball_y) < arrow_len2 * 4;
     triangle_square = abs20(crossP(ball_x           - h_coord, ball_y           - v_coord,
                                    ball_x + arrow_x - h_coord, ball_y + arrow_y - v_coord));
