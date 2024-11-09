@@ -54,6 +54,8 @@ int main(int argc, char* argv[]) {
 
   // reset
   top->sim_rst   = 1;
+  top->accel_data_x = 0;
+  top->accel_data_y = 0;
   top->pixel_clk = 0;
   top->eval();
   top->pixel_clk = 1;
@@ -68,11 +70,12 @@ int main(int argc, char* argv[]) {
   uint64_t frame_count = 0;
   uint64_t start_ticks = SDL_GetPerformanceCounter();
 
+  int pixel_clk = 0;
+
   while (1) {
     // cycle the clock
-      top->pixel_clk = 1;
-      top->eval();
-      top->pixel_clk = 0;
+      pixel_clk ^= 1;
+      top->pixel_clk = pixel_clk;
       top->eval();
 
     // update pixel if not in blanking interval
@@ -87,9 +90,13 @@ int main(int argc, char* argv[]) {
       if (top->sdl_sy == V_RES && top->sdl_sx == 0) {
         // check for quit event
         SDL_Event e;
-        if (SDL_PollEvent(&e)) {
+        while (SDL_PollEvent(&e)) {
           if (e.type == SDL_QUIT) {
             break;
+          }
+          if (e.type == SDL_MOUSEMOTION) {
+            top->accel_data_x = (e.motion.y - 300) / 10 - 3;
+            top->accel_data_y = (e.motion.x - 400) / 10 - 1;
           }
         }
 

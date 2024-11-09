@@ -99,7 +99,7 @@ begin
     else
       l = m;
   end
-  sqrt = l;
+  sqrt = l[9:0];
 end
 endfunction
 
@@ -335,10 +335,13 @@ endfunction
   logic               draw_finish = 0;
   logic               draw_arrow_point;
   logic [9:0]         sqrt_arrow;
+  logic [11:0]        helper;
 
   always @ (posedge pixel_clk ) begin
-    arrow_x = $signed({accel_y_end_of_frame, 4'b0}) / 20;
-    arrow_y = $signed({accel_x_end_of_frame, 4'b0}) / 20;
+    helper = $signed({accel_y_end_of_frame, 4'b0}) / 20;
+    arrow_x = helper[9:0];
+    helper = $signed({accel_x_end_of_frame, 4'b0}) / 20;
+    arrow_y = helper[9:0];
     // sqrt_arrow = sqrt((dist2(0, 0, arrow_x, arrow_y)));
     // arrow_x = arrow_x * 10 / sqrt_arrow;
     // arrow_y = arrow_y * 10 / sqrt_arrow;
